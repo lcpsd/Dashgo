@@ -7,8 +7,6 @@ import { Sidebar } from "../../components/Sidebar";
 
 export default function UsersList(){
 
-    const [showEdit, setShowEdit] = useState(false)
-
     return(
         <Box>
             <Header/>
@@ -65,17 +63,15 @@ export default function UsersList(){
 
                                 <Td>
                                     
-                                    {
-                                        showEdit &&
-                                        <Button
-                                        as="a"
-                                        size="sm"
-                                        colorScheme="purple"
-                                        leftIcon={<Icon as={RiPencilLine} fontSize="18"/>}
-                                        >
-                                            Editar
-                                        </Button>
-                                    }
+                                    showEdit &&
+                                    <Button
+                                    as="a"
+                                    size="sm"
+                                    colorScheme="purple"
+                                    leftIcon={<Icon as={RiPencilLine} fontSize="18"/>}
+                                    >
+                                        Editar
+                                    </Button>
                                 </Td>
                             </Tr>
                         </Tbody>
