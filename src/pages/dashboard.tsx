@@ -1,9 +1,9 @@
 import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react";
-import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 // Fox fix 'window is not defined' error in Apex charts
 import dynamic from 'next/dynamic';
 import { ApexOptions } from "apexcharts";
+import { Header } from "../components/Header";
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 export default function Dashboard(){

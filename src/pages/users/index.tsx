@@ -62,8 +62,6 @@ export default function UsersList(){
                                 <Td>21 de Fevereiro, 2022</Td>
 
                                 <Td>
-                                    
-                                    showEdit &&
                                     <Button
                                     as="a"
                                     size="sm"
