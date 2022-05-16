@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
 import { useState } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
@@ -6,6 +6,11 @@ import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 
 export default function UsersList(){
+
+    const isWideVersion = useBreakpointValue({
+        base: false,
+        lg: true
+    })
 
     return(
         <Box>
@@ -40,9 +45,9 @@ export default function UsersList(){
                                     Usuário
                                 </Th>
 
-                                <Th>Data de Cadastro</Th>
+                                {isWideVersion && <Th>Data de Cadastro</Th>}
 
-                                <Th width="8">Ações</Th>
+                                {isWideVersion && <Th width="8">Ações</Th>}
                             </Tr>
                         </Thead>
 
@@ -59,9 +64,11 @@ export default function UsersList(){
                                     </Box>
                                 </Td>
 
-                                <Td>21 de Fevereiro, 2022</Td>
+                                {isWideVersion && <Td>21 de Fevereiro, 2022</Td>}
 
-                                <Td>
+                                {
+                                    isWideVersion &&
+                                    <Td>
                                     <Button
                                     as="a"
                                     size="sm"
@@ -71,6 +78,7 @@ export default function UsersList(){
                                         Editar
                                     </Button>
                                 </Td>
+                                }
                             </Tr>
                         </Tbody>
                     </Table>
