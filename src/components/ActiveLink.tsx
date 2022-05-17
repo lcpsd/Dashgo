@@ -12,7 +12,7 @@ export function ActiveLink({children, ...rest}: ActiveLinksProps){
     
     let isActive = false
 
-    asPath == rest.href || String(asPath).includes(String(rest.href)) 
+    String(asPath).includes(String(rest.href)) 
     && (isActive = true)
 
     return(
