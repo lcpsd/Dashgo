@@ -29,7 +29,7 @@ export function makeServer(){
         },
 
         seeds(server){
-            server.createList('user', 50)
+            server.createList('user', 200)
         },
 
         routes(){
@@ -46,8 +46,6 @@ export function makeServer(){
                 const pageEnd = pageStart + Number(per_page)
 
                 const users = this.serialize(schema.all('user').models.slice(pageStart, pageEnd))
-
-                console.log(users)
 
                 return new Response(200, {'x-total-count': String(total)}, {users})
             })
