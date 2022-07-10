@@ -5,7 +5,11 @@ import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import { api } from "../../services/axios/api";
+import { queryClient } from "../../services/queryClient";
+import { useRouter } from "next/router";
 
 type CreateUserFormData = {
     name: string;
@@ -21,15 +25,34 @@ const createUserFormSchema = yup.object({
     password_confirmation: yup.string().oneOf([null, yup.ref('password')], "Senhas diferentes")
 })
 
-export default function UsersList(){
+export default function CreateUser(){
+
+    const router = useRouter()
+
+    const createUser = useMutation(async (user: CreateUserFormData) => {
+        const res = await api.post('users', {
+            user:{
+                ...user,
+                created_at: new Date()
+            }
+        })
+
+        return res.data.user
+    }, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('users')
+        }
+    })
 
     const {register, handleSubmit, formState:{errors, isSubmitting}} = useForm({
         resolver:yupResolver(createUserFormSchema)
     })
 
-    function handleCreateUser(values: CreateUserFormData){
+    const handleCreateUser: SubmitHandler<CreateUserFormData> = async (values) =>{
+        await createUser.mutateAsync(values)
 
-    }
+        router.push('/users')
+    } 
 
     return(
         <Box>
